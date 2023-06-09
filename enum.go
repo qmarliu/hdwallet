@@ -15,7 +15,6 @@ const (
 	ETHToken  uint32 = 0x20000000
 )
 
-
 // wallet type from bip44
 const (
 	// https://github.com/satoshilabs/slips/blob/master/slip-0044.md#registered-coin-types
@@ -30,24 +29,20 @@ const (
 
 	//my add
 	TRON = ZeroQuote + 195
-	EOS =  ZeroQuote + 194
-	XRP = ZeroQuote + 144
-	ZEN = ZeroQuote + 121
+	EOS  = ZeroQuote + 194
+	XRP  = ZeroQuote + 144
+	ZEN  = ZeroQuote + 121
 	WICC = ZeroQuote + 99999
 	NULS = ZeroQuote + 8964
-	IOST = ZeroQuote + 291
 
 	// btc token
 	USDT = BTCToken + 1
 
 	// eth token
-	//IOST = ETHToken + 1 //remove
 	USDC = ETHToken + 2
-
 )
 
 var coinTypes = map[uint32]uint32{
 	USDT: BTC,
-	IOST: ETH,
 	USDC: ETH,
 }
