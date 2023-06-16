@@ -1,11 +1,10 @@
 package hdwallet
 
 import (
+	"github.com/btcsuite/btcd/btcutil"
 	"github.com/btcsuite/btcd/chaincfg"
-	"github.com/btcsuite/btcutil"
 	"github.com/eoscanada/eos-go/ecc"
 )
-
 
 func init() {
 	coins[EOS] = newEOS
@@ -43,16 +42,15 @@ func (c *eos) GetKey() *Key {
 
 func (c *eos) GetAddress() (string, error) {
 
-	wif, err := btcutil.NewWIF(c.GetKey().Private,&chaincfg.MainNetParams,true)
+	wif, err := btcutil.NewWIF(c.GetKey().Private, &chaincfg.MainNetParams, true)
 	if err != nil {
 		panic(err)
 	}
 
 	acc, err := ecc.NewPrivateKey(wif.String())
 	if err != nil {
-		return "",err
+		return "", err
 	}
 
-	return acc.PublicKey().String(),nil
+	return acc.PublicKey().String(), nil
 }
-

@@ -3,7 +3,8 @@ package hdwallet
 import (
 	"crypto/sha256"
 	"errors"
-	"github.com/btcsuite/btcutil/base58"
+
+	"github.com/btcsuite/btcd/btcutil/base58"
 	"golang.org/x/crypto/ripemd160"
 )
 
@@ -47,21 +48,21 @@ func (c *nuls) GetAddress() (string, error) {
 
 type NULSAddress struct {
 	AddType uint8
-	Prefix string
+	Prefix  string
 }
 
-const addType   = 1
+const addType = 1
+
 var (
 	constant = []rune{'a', 'b', 'c', 'd', 'e'}
 
 	NULS_defalut NULSAddress
 
-	NULS_mainnetAddress = NULSAddress{AddType:1,Prefix:"NULS"}
-	NULS_testnetAddress = NULSAddress{AddType:2,Prefix:"tNULS"}
-
+	NULS_mainnetAddress = NULSAddress{AddType: 1, Prefix: "NULS"}
+	NULS_testnetAddress = NULSAddress{AddType: 2, Prefix: "tNULS"}
 )
 
-//sha256之后hash160
+// sha256之后hash160
 func Sha256hash160(pub []byte) []byte {
 	h := sha256.New()
 	h.Write(pub)
@@ -95,7 +96,7 @@ func GetAddressByPub(pub []byte) (string, error) {
 	return NULS_defalut.Prefix + string(constant[len(NULS_defalut.Prefix)-1]) + string(resultBytes), nil
 }
 
-//异或方法
+// 异或方法
 func GetXor(body []byte) byte {
 	var xor byte
 	xor = 0x00
@@ -105,7 +106,7 @@ func GetXor(body []byte) byte {
 	return xor
 }
 
-//chainid转换
+// chainid转换
 func ShortToBytes(val int) []byte {
 	bytes := make([]byte, 2)
 	bytes[1] = (byte)(0xFF & (val >> 8))
